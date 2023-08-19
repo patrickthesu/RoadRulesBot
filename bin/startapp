@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Activating virtual enviroment..."
+source ../env/bin/activate
+echo "Successfull!"
+
+python install.py
+clear
+
+echo "Enter bot token:"
+read input
+export RF_PDD_TESTS_BOT_API=$input
+
+cd ..
+python config.py
