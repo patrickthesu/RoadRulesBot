@@ -1,10 +1,20 @@
 #!/bin/bash
+cd $(dirname "$0")
 
 echo "Activating virtual enviroment..."
 source ../env/bin/activate
 echo "Successfull!"
 
-python install.py
+while true; do
+    echo "Do you want to install deps? [Y/n] "
+    read yn
+    case $yn in
+        [Yy]* ) python install.py; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 clear
 
 echo "Enter bot token:"
@@ -12,4 +22,8 @@ read input
 export RF_PDD_TESTS_BOT_API=$input
 
 cd ..
-python config.py
+exec python bot.py
+cd -
+
+echo "Program has been stopped."
+
